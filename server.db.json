@@ -1,0 +1,16 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "amount": 100,
+      "currency": "MXN",
+      "date": "2021-01-01"
+    },
+    {
+      "id": 2,
+      "amount": 200,
+      "currency": "BRL",
+      "date": "2021-01-02"
+    }
+  ]
+}

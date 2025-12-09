@@ -1,0 +1,21 @@
+<ng-container *ngIf="transactions$ | async as transactions">
+  <ul>
+    <li *ngFor="let transaction of transactions">
+      <p>Currency com angular pipe</p>
+      <p>{{ transaction.amount | currency : transaction.currency }}</p>
+      <p>Currency com NgxCurrency</p>
+      <input type="text" [formControl]="currency" currencyMask />
+      <p>Currency com Maskito</p>
+      <input type="text" [formControl]="currency" appMttCurrencyMask />
+    </li>
+  </ul>
+</ng-container>
+
+<p>
+  <label for="language">Language</label>
+  <select [formControl]="language">
+    <option *ngFor="let option of languageOptions" [value]="option">
+      {{ option }}
+    </option>
+  </select>
+</p>
