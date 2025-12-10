@@ -1,4 +1,5 @@
 import {
+  DestroyRef,
   Directive,
   ElementRef,
   forwardRef,
@@ -9,7 +10,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Maskito } from '@maskito/core';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { UserPreferencesService } from '../services/user-preferences.service';
 import {
   createCurrencyMaskOptions,
@@ -36,9 +37,10 @@ export class MttCurrencyMaskDirective
 {
   private readonly el = inject(ElementRef<HTMLInputElement>);
   private readonly userPreferencesService = inject(UserPreferencesService);
+  private readonly destroyRef = inject(DestroyRef)
 
   private readonly language$ = this.userPreferencesService.language$;
-  private subscription: Subscription | null = null;
+
   private maskitoRef: Maskito | null = null;
 
   private currentConfig: CurrencyConfig = DEFAULT_CURRENCY_CONFIG;
@@ -96,14 +98,14 @@ export class MttCurrencyMaskDirective
   }
 
   ngOnInit(): void {
-    this.subscription = this.language$.subscribe((language) => {
-      // Destroi a instância anterior do Maskito
+    this.language$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((language) => {
       this.maskitoRef?.destroy();
 
       this.currentConfig =
         CURRENCY_CONFIG_MAP[language] ?? DEFAULT_CURRENCY_CONFIG;
 
-      // Inicializa ou re-formata o valor com a nova configuração
       const currentValue = parseFormattedValue(
         this.inputElement.value,
         this.currentConfig
@@ -114,14 +116,12 @@ export class MttCurrencyMaskDirective
       );
       this.inputElement.value = formattedValue;
 
-      // Cria nova instância do Maskito
       const maskOptions = createCurrencyMaskOptions(this.currentConfig);
       this.maskitoRef = new Maskito(this.inputElement, maskOptions);
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
     this.maskitoRef?.destroy();
   }
 }
