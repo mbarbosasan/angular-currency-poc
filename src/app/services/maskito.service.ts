@@ -1,41 +1,42 @@
 import { Injectable, inject } from '@angular/core';
 import { MaskitoNumberParams, maskitoNumberOptionsGenerator } from '@maskito/kit';
-import { UserPreferencesService } from './user-preferences.service';
 import { map } from 'rxjs';
+import { UserPreferencesService } from './user-preferences.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MaskitoService {
-
   private readonly userPreferencesService = inject(UserPreferencesService);
 
   countryOptions: Record<string, MaskitoNumberParams> = {
-    'BR': {
+    BR: {
       maximumFractionDigits: 2,
       thousandSeparator: '.',
       decimalSeparator: ',',
+      prefix: 'R$ ',
+    },
+    MX: {
+      maximumFractionDigits: 2,
+      thousandSeparator: '.',
+      decimalSeparator: '.',
       prefix: 'MXN$ ',
     },
-    'MX': {
+    US: {
       maximumFractionDigits: 2,
       thousandSeparator: '.',
       decimalSeparator: '.',
-      prefix: 'MXN$ '
+      prefix: '$ ',
     },
-    'US': {
-      maximumFractionDigits: 2,
-      thousandSeparator: '.',
-      decimalSeparator: '.',
-      prefix: '$ '
-    }
-  }
+  };
 
-  constructor() { }
+  constructor() {}
 
   getMaskitoOptions() {
     return this.userPreferencesService.country$.pipe(
-      map((country) => maskitoNumberOptionsGenerator(this.countryOptions[country]))
-    )
+      map((country) =>
+        maskitoNumberOptionsGenerator(this.countryOptions[country])
+      )
+    );
   }
 }
