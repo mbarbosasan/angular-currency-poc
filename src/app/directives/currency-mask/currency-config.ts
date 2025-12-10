@@ -6,26 +6,20 @@ export interface CurrencyConfig {
 }
 
 export const CURRENCY_CONFIG_MAP: Record<string, CurrencyConfig> = {
-  'pt-BR': {
+  'BR': {
     prefix: 'R$ ',
     decimalSeparator: ',',
     thousandsSeparator: '.',
     currencyCode: 'BRL',
   },
-  'en-US': {
+  'US': {
     prefix: '$ ',
     decimalSeparator: '.',
     thousandsSeparator: ',',
     currencyCode: 'USD',
   },
-  'es-ES': {
-    prefix: '€ ',
-    decimalSeparator: ',',
-    thousandsSeparator: '.',
-    currencyCode: 'EUR',
-  },
-  'es-MX': {
-    prefix: '$ ',
+  'MX': {
+    prefix: 'MXN$ ',
     decimalSeparator: '.',
     thousandsSeparator: ',',
     currencyCode: 'MXN',
@@ -33,4 +27,4 @@ export const CURRENCY_CONFIG_MAP: Record<string, CurrencyConfig> = {
 };
 
 export const DEFAULT_CURRENCY_CONFIG: CurrencyConfig =
-  CURRENCY_CONFIG_MAP['en-US'];
+  CURRENCY_CONFIG_MAP['BR'];

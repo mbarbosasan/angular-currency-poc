@@ -2,7 +2,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyDirective } from 'ngx-currency';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { MttCurrencyMaskDirective } from './directives/mtt-currency-mask.directive';
 import { TransactionsService } from './services/transactions.service';
 import { UserPreferencesService } from './services/user-preferences.service';
@@ -25,17 +25,19 @@ export class AppComponent implements OnInit {
   private readonly userPreferencesService = inject(UserPreferencesService);
 
   currency = new FormControl<string>('');
-  language = new FormControl<string>(window.navigator.language);
+  language = new FormControl<string>('BR');
 
-  languageOptions = ['pt-BR', 'en-US', 'es-ES'];
+  countryOptions = ['BR', 'US', 'MX'];
 
   transactions$ = this.transactionsService
     .getTransactions()
     .pipe(tap(console.log));
 
   ngOnInit(): void {
-    this.language.valueChanges.subscribe((language) => {
-      this.userPreferencesService.setLanguage(language!);
+    this.language.valueChanges.pipe(
+      filter((val): val is string => !!val),
+    ).subscribe((country) => {
+      this.userPreferencesService.setcountry(country);
     });
   }
 }

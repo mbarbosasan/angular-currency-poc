@@ -39,7 +39,7 @@ export class MttCurrencyMaskDirective
   private readonly userPreferencesService = inject(UserPreferencesService);
   private readonly destroyRef = inject(DestroyRef)
 
-  private readonly language$ = this.userPreferencesService.language$;
+  private readonly country$ = this.userPreferencesService.country$;
 
   private maskitoRef: Maskito | null = null;
 
@@ -98,13 +98,13 @@ export class MttCurrencyMaskDirective
   }
 
   ngOnInit(): void {
-    this.language$.pipe(
+    this.country$.pipe(
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe((language) => {
+    ).subscribe((country) => {
       this.maskitoRef?.destroy();
-
+      console.log(CURRENCY_CONFIG_MAP[country])
       this.currentConfig =
-        CURRENCY_CONFIG_MAP[language] ?? DEFAULT_CURRENCY_CONFIG;
+        CURRENCY_CONFIG_MAP[country] ?? DEFAULT_CURRENCY_CONFIG;
 
       const currentValue = parseFormattedValue(
         this.inputElement.value,

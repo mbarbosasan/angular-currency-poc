@@ -5,13 +5,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UserPreferencesService {
-  private readonly language = new BehaviorSubject<string>(
-    window.navigator.language
+
+  private readonly country = new BehaviorSubject<string>(
+    'BR'
   );
 
-  language$ = this.language.asObservable();
+  country$ = this.country.asObservable();
 
-  setLanguage(language: string) {
-    this.language.next(language);
+  setcountry(country: string) {
+    this.country.next(country);
   }
 }
