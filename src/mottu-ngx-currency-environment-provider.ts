@@ -14,11 +14,11 @@ export function provideCustomNgxCurrencyEnvironment(): EnvironmentProviders {
 
   // Idealmente aqui deveriamos ter alguma forma de capturar o país do usuário, como o objetivo é apenas
   // validar o NgxCurrency, é feito um acesso randômico na Array;
-  const max = 3;
-  const min = 1;
+  const max = 2;
+  const min = 0;
   
   const randomIndex = Math.floor((Math.random() * (max - min + 1)) + min);
-  const prefix = countryPrefix[randomIndex - 1];
+  const prefix = countryPrefix[randomIndex];
 
   return makeEnvironmentProviders([
     {
