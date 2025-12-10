@@ -6,6 +6,9 @@ import { filter, tap } from 'rxjs/operators';
 import { MttCurrencyMaskDirective } from './directives/mtt-currency-mask.directive';
 import { TransactionsService } from './services/transactions.service';
 import { UserPreferencesService } from './services/user-preferences.service';
+import { MaskitoOptions } from '@maskito/core';
+import { MaskitoService } from './services/maskito.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,11 +26,14 @@ import { UserPreferencesService } from './services/user-preferences.service';
 export class AppComponent implements OnInit {
   private readonly transactionsService = inject(TransactionsService);
   private readonly userPreferencesService = inject(UserPreferencesService);
+  private readonly maskitoService = inject(MaskitoService);
 
   currency = new FormControl<string>('');
   language = new FormControl<string>('BR');
 
   countryOptions = ['BR', 'US', 'MX'];
+
+  maskitoOptions: Observable<MaskitoOptions> = this.maskitoService.getMaskitoOptions();
 
   transactions$ = this.transactionsService
     .getTransactions()

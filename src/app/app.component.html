@@ -6,7 +6,7 @@
       <p>Currency com NgxCurrency</p>
       <input type="text" [formControl]="currency" currencyMask />
       <p>Currency com Maskito</p>
-      <input type="text" [formControl]="currency" appMttCurrencyMask />
+      <input type="text" [formControl]="currency" appMttCurrencyMask [maskito]="maskitoOptions | async" />
     </li>
   </ul>
 </ng-container>

@@ -29,9 +29,15 @@ dependencies:
   '@angular/router':
     specifier: ^16.2.0
     version: 16.2.12(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/platform-browser@16.2.12)(rxjs@7.8.2)
+  '@maskito/angular':
+    specifier: '3'
+    version: 3.11.1(@angular/core@16.2.12)(@angular/forms@16.2.12)(@maskito/core@3.11.1)
   '@maskito/core':
-    specifier: ^5.0.0
-    version: 5.0.0
+    specifier: ^3.11.1
+    version: 3.11.1
+  '@maskito/kit':
+    specifier: ^3.11.1
+    version: 3.11.1(@maskito/core@3.11.1)
   rxjs:
     specifier: ~7.8.0
     version: 7.8.2
@@ -2051,8 +2057,29 @@ packages:
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
     dev: true
 
-  /@maskito/core@5.0.0:
-    resolution: {integrity: sha512-35TXAOLC89xmGn5TDvQEzpFqy0Y3A94PE7OssfKItNyFiAzu4riwsYhIumEN6e5UJLsxCbAfgZzVGOFdeLWhrA==}
+  /@maskito/angular@3.11.1(@angular/core@16.2.12)(@angular/forms@16.2.12)(@maskito/core@3.11.1):
+    resolution: {integrity: sha512-+OZzbRJj/9fOGhgPr0xYctSHe/Ngahip3VdNWBslRTpt7g+UTBYcB8vU9J4cHfpdXYeLM3tM0tnKksc3Eis0+Q==}
+    peerDependencies:
+      '@angular/core': '>=16.0.0'
+      '@angular/forms': '>=16.0.0'
+      '@maskito/core': ^3.11.1
+    dependencies:
+      '@angular/core': 16.2.12(rxjs@7.8.2)(zone.js@0.13.3)
+      '@angular/forms': 16.2.12(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/platform-browser@16.2.12)(rxjs@7.8.2)
+      '@maskito/core': 3.11.1
+      tslib: 2.8.1
+    dev: false
+
+  /@maskito/core@3.11.1:
+    resolution: {integrity: sha512-zN5k/BiZXblo8mEFhsGnnXBCqKMkjEGArorOOcpB1/ymZyqF12Dk6IipEsSE6abMnWw4YF2tukzfq73BFZKz8A==}
+    dev: false
+
+  /@maskito/kit@3.11.1(@maskito/core@3.11.1):
+    resolution: {integrity: sha512-KOBUqxRz383xJWCoe+Emwxv2oAzUrZobIN+Gntmi5Py2S10XbqYnGX/6W7QHN8CUK2Nx11d3HsxbEQaq5Hinjg==}
+    peerDependencies:
+      '@maskito/core': ^3.11.1
+    dependencies:
+      '@maskito/core': 3.11.1
     dev: false
 
   /@ngtools/webpack@16.2.16(@angular/compiler-cli@16.2.12)(typescript@5.1.6)(webpack@5.94.0):
